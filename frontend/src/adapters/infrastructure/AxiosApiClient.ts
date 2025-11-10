@@ -3,7 +3,7 @@ import type { IApiClient } from "../../core/ports/IApiClient";
 import type { Route, ComparisonData, ComplianceBalance, BankEntry } from "../../core/domain/types"; // <-- Import ComparisonData
 import type { AdjustedCB } from "../../core/domain/types";
 
-const API_BASE_URL = "http://localhost:3001/api";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3001/api";
 
 export class AxiosApiClient implements IApiClient {
   
