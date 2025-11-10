@@ -1,0 +1,66 @@
+// This is your datasource
+generator client {
+  provider = "prisma-client-js"
+}
+
+// prisma/schema.prisma
+datasource db {
+  provider  = "postgresql"
+  url  	    = env("DATABASE_URL")
+}
+
+
+// Schema from image_8dc405.png
+model routes {
+  id              String   @id @default(uuid())
+  route_id        String   @unique // "R001", "R002", etc.
+  vesselType      String
+  fuelType        String
+  year            Int
+  ghg_intensity   Float
+  fuelConsumption Float
+  distance        Float
+  totalEmissions  Float
+  is_baseline     Boolean  @default(false)
+
+  ship_compliance ship_compliance[]
+  bank_entries    bank_entries[]
+  pool_members    pool_members[]
+}
+
+model ship_compliance {
+  id          String   @id @default(uuid())
+  ship_id     String   // This links to routes.id
+  year        Int
+  cb_gco2eq   Float
+
+  ship        routes   @relation(fields: [ship_id], references: [id])
+}
+
+model bank_entries {
+  id            String   @id @default(uuid())
+  ship_id       String
+  year          Int
+  amount_gco2eq Float    // Surplus banked
+
+  ship          routes   @relation(fields: [ship_id], references: [id])
+}
+
+model pools {
+  id          String   @id @default(uuid())
+  year        Int
+  created_at  DateTime @default(now())
+
+  pool_members pool_members[]
+}
+
+model pool_members {
+  id         String   @id @default(uuid())
+  pool_id    String
+  ship_id    String
+  cb_before  Float
+  cb_after   Float
+
+  pool       pools    @relation(fields: [pool_id], references: [id])
+  ship       routes   @relation(fields: [ship_id], references: [id])
+}
