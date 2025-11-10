@@ -8,7 +8,5 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true, // Evaluation requirement
     "skipLibCheck": true
-  },
-  "include": ["src/**/*"], // <-- You can also add this to be more explicit
-  "exclude": ["node_modules", "prisma"] 
+  }
 }
