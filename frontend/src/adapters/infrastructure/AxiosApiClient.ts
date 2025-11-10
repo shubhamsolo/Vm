@@ -13,54 +13,54 @@ export class AxiosApiClient implements IApiClient {
   });
 
   async getRoutes(): Promise<Route[]> {
-    const response = await this.client.get("/routes");
+    const response = await this.client.get("api/routes");
     return response.data;
   }
 
   async setRouteAsBaseline(routeId: string): Promise<void> {
-    await this.client.post(`/routes/${routeId}/baseline`);
+    await this.client.post(`api/routes/${routeId}/baseline`);
   }
 
   // --- ADD THIS NEW METHOD ---
   async getComparisonData(): Promise<ComparisonData> {
-    const response = await this.client.get("/routes/comparison");
+    const response = await this.client.get("api/routes/comparison");
     return response.data;
   }
 
   // --- ADD THESE 4 METHODS ---
   async getComplianceBalance(shipId: string, year: number): Promise<ComplianceBalance> {
-    const response = await this.client.get("/compliance/cb", {
+    const response = await this.client.get("api/compliance/cb", {
       params: { shipId, year },
     });
     return response.data;
   }
 
   async getBankedRecords(shipId: string): Promise<BankEntry[]> {
-    const response = await this.client.get("/banking/records", {
+    const response = await this.client.get("api/banking/records", {
       params: { shipId },
     });
     return response.data;
   }
 
   async bankSurplus(shipId: string, year: number): Promise<BankEntry> {
-    const response = await this.client.post("/banking/bank", { shipId, year });
+    const response = await this.client.post("api/banking/bank", { shipId, year });
     return response.data;
   }
 
   async applySurplus(shipId: string, year: number): Promise<any> {
-    const response = await this.client.post("/banking/apply", { shipId, year });
+    const response = await this.client.post("api/banking/apply", { shipId, year });
     return response.data;
   }
   // --- ADD THESE 2 METHODS ---
   async getAdjustedCB(shipId: string, year: number): Promise<AdjustedCB> {
-    const response = await this.client.get("/compliance/adjusted-cb", {
+    const response = await this.client.get("api/compliance/adjusted-cb", {
       params: { shipId, year },
     });
     return response.data;
   }
 
   async createPool(shipIds: string[], year: number): Promise<any> {
-    const response = await this.client.post("/pools", { shipIds, year });
+    const response = await this.client.post("api/pools", { shipIds, year });
     return response.data;
   }
 }
