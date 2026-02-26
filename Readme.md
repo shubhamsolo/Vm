@@ -1,7 +1,7 @@
 # 🚢 FuelEU Maritime Compliance Platform
 Screen Recording [https://drive.google.com/file/d/1gKp2MKpbYREPW9k6CTdGNTSeiifBa1iv/view?usp=sharing]
 
-live line[https://eloquent-pony-dcf980.netlify.app/]
+live link[https://eloquent-pony-dcf980.netlify.app/]
 
 A full-stack compliance management system for maritime vessels, built with modern web technologies and clean architecture principles.
 
